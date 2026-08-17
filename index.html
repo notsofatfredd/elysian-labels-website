@@ -382,7 +382,7 @@ ul{margin:0;padding:0;list-style:none}
 .hdr-in{display:flex;align-items:center;gap:var(--s6);height:78px}
 .logo{display:flex;align-items:center;gap:.625rem;text-decoration:none;flex-shrink:0}
 .logo-full{height:52px;width:auto;flex-shrink:0}
-.logo-full--footer{height:48px;border-radius:2px}
+.logo-full--footer{height:48px;filter:brightness(0) invert(1)}
 .logo-txt{display:flex;flex-direction:column;line-height:1}
 .logo-name{font-family:var(--display);font-size:1.45rem;font-weight:600;letter-spacing:-.015em}
 .logo-sub{font-family:var(--sans);font-size:.5rem;font-weight:600;letter-spacing:.42em;color:var(--gold);margin-top:3px}
@@ -399,6 +399,11 @@ ul{margin:0;padding:0;list-style:none}
 }
 .nav a:hover::after{transform:scaleX(1)}
 .nav-cta{margin-left:var(--s5)}
+/* .nav a{color:var(--ink)} (class+element) otherwise wins over .btn-primary's
+   plain class selector, invisibly matching the Request Quote button's text
+   to its own background until :hover's higher specificity briefly reveals it. */
+.nav a.nav-cta{color:var(--warm-white)}
+.nav a.nav-cta:hover{color:var(--navy)}
 .burger{display:none;margin-left:auto;background:none;border:1px solid var(--border);border-radius:2px;padding:.6rem .75rem;cursor:pointer;transition:all .2s var(--ease)}
 .burger span{display:block;width:20px;height:1.5px;background:var(--ink);transition:all .2s var(--ease)}
 .burger span+span{margin-top:5px}
@@ -406,7 +411,7 @@ ul{margin:0;padding:0;list-style:none}
 /* ---------- THEME TOGGLE ---------- */
 .theme-toggle{
   display:inline-flex;align-items:center;justify-content:center;
-  width:38px;height:38px;flex-shrink:0;margin-left:var(--s5);
+  width:38px;height:38px;flex-shrink:0;
   background:none;border:1px solid var(--border);border-radius:2px;
   color:var(--ink);cursor:pointer;
   transition:border-color .2s var(--ease),color .2s var(--ease);
@@ -461,11 +466,14 @@ ul{margin:0;padding:0;list-style:none}
 .hero-visual{
   position:relative;overflow:hidden;
   background:var(--navy);border-radius:3px;
-  aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:var(--s6);padding:var(--s7);
+  aspect-ratio:4/3;
   perspective:900px;
   transform-style:preserve-3d;
   transition:transform .15s ease-out;
+}
+.hero-visual-photo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center;
 }
 .hero-visual::before{
   content:"";position:absolute;inset:0;
@@ -477,11 +485,11 @@ ul{margin:0;padding:0;list-style:none}
   content:"";position:absolute;inset:0;
   background:radial-gradient(120% 100% at 50% 15%, rgba(198,154,59,.16), transparent 60%);
 }
-.hero-mark-img{width:min(180px,38%);height:auto;position:relative;z-index:1;filter:brightness(0) invert(1)}
-.hero-visual-rule{width:64px;height:2px;background:var(--gold);position:relative;z-index:1}
 .hero-visual-spec{
   font-family:var(--mono);font-size:.6875rem;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(251,250,247,.55);text-align:center;position:relative;z-index:1;
+  color:rgba(251,250,247,.85);text-align:center;position:absolute;left:0;right:0;bottom:0;z-index:1;
+  padding:var(--s6) var(--s5) var(--s5);
+  background:linear-gradient(to top, rgba(8,27,60,.85), transparent);
 }
 
 /* ---------- SCANNER SWEEP ----------
@@ -729,7 +737,7 @@ ul{margin:0;padding:0;list-style:none}
 <header class="hdr">
   <div class="wrap hdr-in">
     <a class="logo" href="/" aria-label="Elysian Labels home">
-      <img class="logo-full" src="assets/elysian-logo-primary.png" alt="Elysian Labels" height="40">
+      <img class="logo-full" src="assets/elysian-monogram-navy.png" alt="Elysian Labels" height="40">
     </a>
 
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
@@ -770,12 +778,9 @@ ul{margin:0;padding:0;list-style:none}
       </div>
     </div>
 
-    <!-- SWAP: replace .hero-visual contents with real product photography
-         (label rolls arranged on navy sweep) when available. -->
     <div class="hero-visual" id="heroVisual">
+      <img class="hero-visual-photo" src="assets/elysian-prod-thermal-direct-overview.jpg" alt="Elysian Labels direct thermal label rolls, stacked and ready for despatch" loading="eager">
       <div class="scanline" aria-hidden="true"></div>
-      <img src="assets/elysian-mark-navy.png" alt="Elysian Labels" class="hero-mark-img">
-      <span class="hero-visual-rule" aria-hidden="true"></span>
       <p class="hero-visual-spec">Direct Thermal · Thermal Transfer</p>
     </div>
   </div>
@@ -1141,7 +1146,7 @@ ul{margin:0;padding:0;list-style:none}
     <div class="ftr-grid">
       <div>
         <a class="logo" href="/" aria-label="Elysian Labels home">
-          <img class="logo-full logo-full--footer" src="assets/elysian-logo-reversed.png" alt="Elysian Labels" height="48">
+          <img class="logo-full logo-full--footer" src="assets/elysian-monogram-navy.png" alt="Elysian Labels" height="48">
         </a>
         <p class="ftr-blurb">Premium barcode labels engineered for performance, printed for precision, built for every industry.</p>
       </div>
