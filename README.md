@@ -35,6 +35,13 @@ Saeed wanted the site filled today (invoice going out), including the leather/ga
 
 Also ran the AI-tell / dead-click-affordance audit (per the standing ATLAS Web OS checklist): scanned all visible copy for generic AI-marketing vocabulary (seamless, unparalleled, cutting-edge, leverage, elevate, etc.) — none found, copy reads as genuinely specific/technical throughout. Found and fixed one real dead-click tell: `.ind` (Industries) cards had a strong hover lift + glow + shadow — the classic "this is a button" visual cue — but are plain, non-interactive `<article>` elements with zero destination, not even a `href="#"` placeholder. Softened to just a border-color highlight on hover (ambient "you're looking at this" feedback, not a false button affordance). The already-known `href="#"` cases (3 article cards, Privacy/Terms) are unchanged — those at least look like normal placeholder links, not full hover-triggered button illusions.
 
+## 2026-08-17 (part E) — removed Industrial Polyester Rolls product + entire Resources section
+Saeed's call, both fully removed rather than left as placeholders:
+- **Industrial Polyester Rolls** card gone from Products (now 2 cards, "Two constructions. One standard.", grid switched `grid-3`→`grid-2`). Also stripped every other mention of polyester as an offering: meta description, hero-visual spec line, trust bar item, the quote form's Label Type dropdown, and the footer Products column.
+- **Resources section** ("Notes from the line", `id="insights"`, 3 article placeholder cards) removed entirely, along with its header nav link.
+
+Verified after: all anchor links (`#materials`/`#industries`/`#products`/`#why`/`#quote`) still resolve, no dangling `#insights` references anywhere, HTML/CSS brace and comment balance still even, `<section>`/`<article>` tag counts balanced.
+
 ## Files
 - `index.html` — everything, single file, tokens documented inline at the top of `<style>`
 - `.htaccess` — security headers + backup-file block
