@@ -57,6 +57,9 @@ Cropped the rainbow and navy quadrants to tight standalone transparent PNGs (bou
 
 Not used from the same pack (out of scope for this specific ask, noted for later): `01_garment_labels_swingtags_lineup.png` and `02_leather_patches_Shibby_Royalsa.png` are polished studio versions of the phone photos already used in the "New at Elysian" section — worth an upgrade swap if Saeed wants it, not done unprompted. `03`/`04`/`05` are earlier logo concept rounds (CE monogram, EL circle badge, icon-only precursor) — explicitly marked not-final in the pack's own README, left unused.
 
+## 2026-08-17 (part H) — mobile nav dropdown: closed-state text peeking out above the fold
+Saeed reported (with a screenshot) the "Solutions" nav link visibly peeking out above the hero content on mobile, burger closed. Root cause: `.nav{display:flex;flex-direction:column;...max-height:0;overflow:hidden}` collapses correctly in principle, but flex items default to `min-height:auto`, which lets their intrinsic content height resist a column flex container's height constraint — a well-documented Flexbox/WebKit interaction, not something max-height/overflow:hidden alone reliably overrides. Fixed by adding `min-height:0` to `.nav a` so the links can actually compress to zero when the dropdown is collapsed.
+
 ## Files
 - `index.html` — everything, single file, tokens documented inline at the top of `<style>`
 - `.htaccess` — security headers + backup-file block
