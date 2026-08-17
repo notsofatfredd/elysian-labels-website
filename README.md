@@ -30,7 +30,12 @@ The 3 Insights/Resources article thumbnails also remain placeholders — none of
 
 New CSS: `.ph-photo` (reuses the existing `.ph--4x3`/`.ph--16x9` aspect-ratio classes, `object-fit:cover` crop) — applied directly to `<img>` tags in place of the empty `.ph` div, `loading="lazy"` on all 4.
 
+## 2026-08-17 (part D) — new-line teaser section + AI-tell/dead-click sweep
+Saeed wanted the site filled today (invoice going out), including the leather/garment line — but the copy on the empty Industrial Polyester Rolls card is specifically about waterproof/chemical-resistant industrial rolls, so a leather patch photo there would directly contradict the text next to it. Built a proper (if compact) new section instead: **"New at Elysian — Custom garment labelling"** (`id="custom-labels"`), inserted between Products and Materials. Real photo (`elysian-sample-leather-patch.jpg`, cropped from `02_Royalsa_leather_label.jpg` in `Elysian_Labels_Samples.zip` — removed a burned-in phone camera watermark and excess background, kept just the leather patch itself), honest copy pulled directly from Sade's own WhatsApp description (leather patches, woven/silk labels, swing tags, cotton labels, denim die-cut), CTA to the quote form. Industrial Polyester Rolls card and the 3 Insights thumbnails are still placeholders — still no real photo for those specifically.
+
+Also ran the AI-tell / dead-click-affordance audit (per the standing ATLAS Web OS checklist): scanned all visible copy for generic AI-marketing vocabulary (seamless, unparalleled, cutting-edge, leverage, elevate, etc.) — none found, copy reads as genuinely specific/technical throughout. Found and fixed one real dead-click tell: `.ind` (Industries) cards had a strong hover lift + glow + shadow — the classic "this is a button" visual cue — but are plain, non-interactive `<article>` elements with zero destination, not even a `href="#"` placeholder. Softened to just a border-color highlight on hover (ambient "you're looking at this" feedback, not a false button affordance). The already-known `href="#"` cases (3 article cards, Privacy/Terms) are unchanged — those at least look like normal placeholder links, not full hover-triggered button illusions.
+
 ## Files
 - `index.html` — everything, single file, tokens documented inline at the top of `<style>`
 - `.htaccess` — security headers + backup-file block
-- `assets/` — logos, marks, pattern background, 4 real product photos
+- `assets/` — logos, marks, pattern background, 5 real photos (4 barcode-label product shots + 1 cropped garment-label sample)
