@@ -15,7 +15,22 @@ Static site, no build step. Edit `index.html` directly, upload via cPanel File M
 - Full sweep also covered and passed: every nav anchor (`#materials`/`#industries`/`#products`/`#insights`/`#why`/`#quote`) resolves to a real id, every CSS custom property resolves to a defined token, no orphaned/undefined `var()` calls, no duplicate conflicting selectors beyond intentional responsive-breakpoint overrides, no leftover `console.log`/debug code, no lorem-ipsum or template filler text.
 - **Known, not fixed — intentionally placeholder for this preview stage**: 3 "Resources" article cards and the footer Privacy/Terms links use `href="#"` (pages don't exist yet); the quote form `action="#"` has no real backend endpoint wired up yet. Normal for a preview build, but the client should know clicking those does nothing yet.
 
+## 2026-08-17 (part C) — real product photography wired in
+Saeed supplied `files (12).zip` (real photos, matching `ASSET-MANIFEST.md`) and a separate `Elysian_Labels_Samples.zip` (real photos too, sourced via WhatsApp from Sade, owner — but for a **new, different product line**: leather patches, woven/swing-tag labels, cotton labels. Not used here — that's a new site section, out of scope for this pass, follow-up planned separately).
+
+From `files (12).zip`, 4 of the 5 "product" images were genuine photos and got wired into their matching `.ph` placeholder:
+- Direct Thermal Rolls card → `elysian-prod-thermal-direct-overview.jpg`
+- Thermal Transfer Rolls card → `elysian-prod-thermal-transfer-consumables.jpg`
+- Materials & Adhesives section → `elysian-prod-colors-range.jpg`
+- Why Elysian section → `elysian-prod-thermal-direct-detail.jpg`
+
+**The 5th file, `elysian-prod-spec-silver-polyester.jpg`, was not a real photo** — opened it and it's just a text graphic reading "PRODUCT — SILVER POLYESTER INDUSTRIAL ROLL, METALLIC FINISH" (the placeholder's own caption text, rendered as an image). Did not use it. The Industrial Polyester Rolls card still shows the "Photography pending" placeholder — a real photo for it doesn't exist yet.
+
+The 3 Insights/Resources article thumbnails also remain placeholders — none of the available real photos match those editorial concepts (frozen carton, scanner reading, machined part), and using a mismatched photo there would be worse than the placeholder.
+
+New CSS: `.ph-photo` (reuses the existing `.ph--4x3`/`.ph--16x9` aspect-ratio classes, `object-fit:cover` crop) — applied directly to `<img>` tags in place of the empty `.ph` div, `loading="lazy"` on all 4.
+
 ## Files
 - `index.html` — everything, single file, tokens documented inline at the top of `<style>`
 - `.htaccess` — security headers + backup-file block
-- `assets/` — logos, marks, pattern background
+- `assets/` — logos, marks, pattern background, 4 real product photos

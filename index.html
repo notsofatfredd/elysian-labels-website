@@ -366,6 +366,13 @@ ul{margin:0;padding:0;list-style:none}
 .ph--16x9{aspect-ratio:16/9}
 .ph--3x4{aspect-ratio:3/4}
 
+/* Real product photography — replaces .ph in slots where a real photo
+   now exists. Same aspect-ratio utility classes, object-fit:cover crop. */
+.ph-photo{
+  width:100%;height:100%;object-fit:cover;object-position:center;
+  border-radius:3px;border:1px solid var(--border);
+}
+
 /* ============ HEADER ============ */
 .hdr{
   position:sticky;top:0;z-index:100;
@@ -860,7 +867,7 @@ ul{margin:0;padding:0;list-style:none}
 
     <div class="grid-3">
       <article class="prod rv label-card">
-        <div class="ph ph--4x3" title="Product — direct thermal roll, three-quarter view on warm white"></div>
+        <img class="ph-photo ph--4x3" src="assets/elysian-prod-thermal-direct-overview.jpg" alt="Stack of Elysian Labels direct thermal label rolls in various sizes and quantities" loading="lazy">
         <div class="prod-body">
           <p class="prod-sku">DT · DIRECT THERMAL</p>
           <h3 class="h3">Direct Thermal Rolls</h3>
@@ -874,7 +881,7 @@ ul{margin:0;padding:0;list-style:none}
       </article>
 
       <article class="prod rv label-card">
-        <div class="ph ph--4x3" title="Product — thermal transfer roll with ribbon alongside"></div>
+        <img class="ph-photo ph--4x3" src="assets/elysian-prod-thermal-transfer-consumables.jpg" alt="Elysian Labels thermal transfer rolls with wax-resin and resin ribbons alongside" loading="lazy">
         <div class="prod-body">
           <p class="prod-sku">TT · THERMAL TRANSFER</p>
           <h3 class="h3">Thermal Transfer Rolls</h3>
@@ -914,7 +921,7 @@ ul{margin:0;padding:0;list-style:none}
         <p class="eyebrow">Materials &amp; adhesives</p>
         <h2 class="h2">The failure is almost never<br>the printer.</h2>
         <p class="lede" style="margin-top:var(--s5)">It's the face stock against the surface, or the adhesive against the temperature. We source premium-grade face stocks and specialised adhesives so your automated systems never skip a beat.</p>
-        <div class="ph ph--16x9" title="Materials — face stock samples / adhesive close-up · macro shot" style="margin-top:var(--s6)"></div>
+        <img class="ph-photo ph--16x9" src="assets/elysian-prod-colors-range.jpg" alt="Range of Elysian Labels face stock colours — yellow, blue, orange, green, pink, brown and gold label rolls" loading="lazy" style="margin-top:var(--s6)">
       </div>
 
       <div class="mat-list rv">
@@ -991,7 +998,7 @@ ul{margin:0;padding:0;list-style:none}
     <div class="rv">
       <p class="eyebrow">Why Elysian</p>
       <p class="why-stmt">From cold-storage food facilities to heavy industrial manufacturing, our barcode label rolls are engineered for flawless scannability and reliable adhesion.</p>
-      <div class="ph ph--16x9" title="Operations — production floor / roll conversion in progress" style="margin-top:var(--s6)"></div>
+      <img class="ph-photo ph--16x9" src="assets/elysian-prod-thermal-direct-detail.jpg" alt="Stacked Elysian Labels direct thermal label rolls, detail view" loading="lazy" style="margin-top:var(--s6)">
     </div>
 
     <div class="rv">
