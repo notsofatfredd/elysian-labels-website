@@ -382,6 +382,15 @@ ul{margin:0;padding:0;list-style:none}
 .hdr-in{display:flex;align-items:center;gap:var(--s6);height:78px}
 .logo{display:flex;align-items:center;gap:.625rem;text-decoration:none;flex-shrink:0}
 .logo-full{height:52px;width:auto;flex-shrink:0}
+/* Header logo: rainbow variant in light mode, navy in dark mode — same
+   toggle mechanism as the theme sun/moon icons. */
+.logo-full--dark{display:none}
+:root[data-theme="dark"] .logo-full--light{display:none}
+:root[data-theme="dark"] .logo-full--dark{display:block}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .logo-full--light{display:none}
+  :root:not([data-theme="light"]) .logo-full--dark{display:block}
+}
 .logo-full--footer{height:48px;filter:brightness(0) invert(1)}
 .logo-txt{display:flex;flex-direction:column;line-height:1}
 .logo-name{font-family:var(--display);font-size:1.45rem;font-weight:600;letter-spacing:-.015em}
@@ -737,7 +746,8 @@ ul{margin:0;padding:0;list-style:none}
 <header class="hdr">
   <div class="wrap hdr-in">
     <a class="logo" href="/" aria-label="Elysian Labels home">
-      <img class="logo-full" src="assets/elysian-monogram-navy.png" alt="Elysian Labels" height="40">
+      <img class="logo-full logo-full--light" src="assets/elysian-full-logo-rainbow.png" alt="Elysian Labels" height="40">
+      <img class="logo-full logo-full--dark" src="assets/elysian-full-logo-navy.png" alt="Elysian Labels" height="40">
     </a>
 
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark theme" aria-pressed="false">
@@ -1146,7 +1156,7 @@ ul{margin:0;padding:0;list-style:none}
     <div class="ftr-grid">
       <div>
         <a class="logo" href="/" aria-label="Elysian Labels home">
-          <img class="logo-full logo-full--footer" src="assets/elysian-monogram-navy.png" alt="Elysian Labels" height="48">
+          <img class="logo-full logo-full--footer" src="assets/elysian-full-logo-navy.png" alt="Elysian Labels" height="48">
         </a>
         <p class="ftr-blurb">Premium barcode labels engineered for performance, printed for precision, built for every industry.</p>
       </div>
