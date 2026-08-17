@@ -1,0 +1,123 @@
+/* src/styles/globals.css
+ * ============================================================
+ * ELYSIAN LABELS — DESIGN TOKENS
+ * ATLAS OS V1.014 · Identity OS → Web OS
+ * Client: Elysian Labels  ·  Agency: Axiel
+ * Version: 1.0.0
+ * ============================================================
+ *
+ * TYPOGRAPHY LICENSING NOTE
+ * Canela is a commercial typeface from Commercial Type and is NOT
+ * available on Google Fonts. It must be licensed for web use before
+ * production deploy. Source Serif 4 is set as the live fallback and
+ * renders correctly without it.
+ * ============================================================ */
+
+:root {
+  /* ---- 05 · COLOUR SYSTEM ---------------------------------- */
+  --navy:        #081B3C;  /* Deep Navy   — primary, text, dark sections */
+  --gold:        #C69A3B;  /* Muted Gold  — accent, used with restraint  */
+  --warm-white:  #FBFAF7;  /* Warm White  — page base                    */
+  --steel:       #A7AEB8;  /* Steel Grey  — muted / secondary text       */
+  --soft-grey:   #DBDDE3;  /* Soft Grey   — borders, dividers            */
+  --paper:       #FFFFFF;  /* Alternating section base                   */
+
+  /* Derived */
+  --navy-80:     #2A3B57;
+  --navy-06:     rgba(8, 27, 60, .06);
+  --gold-soft:   #E4CB93;
+
+  /* ---- 06 · TYPOGRAPHY SYSTEM ------------------------------ */
+  --display: "Canela", "Canela Text", "Source Serif 4", Georgia, serif;
+  --sans:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Role assignment
+   * --display → headlines & brand statements
+   * --sans    → interface & body content
+   * --mono    → technical data, specifications, eyebrows, labels */
+
+  --fs-display: clamp(2.6rem, 5.6vw, 4.6rem);
+  --fs-h2:      clamp(1.9rem, 3.4vw, 2.9rem);
+  --fs-h3:      1.3rem;
+  --fs-body:    1rem;
+  --fs-small:   0.875rem;
+  --fs-eyebrow: 0.6875rem;
+
+  --ls-display: -0.025em;
+  --ls-eyebrow:  0.2em;
+  --lh-display:  1.02;
+  --lh-body:     1.65;
+
+  /* ---- SPACING SCALE --------------------------------------- */
+  --s1:  0.25rem;  --s2:  0.5rem;  --s3: 0.75rem;  --s4: 1rem;
+  --s5:  1.5rem;   --s6:  2rem;    --s7: 3rem;     --s8: 4rem;
+  --s9:  6rem;     --s10: 8rem;
+
+  /* ---- LAYOUT ---------------------------------------------- */
+  --maxw:   1280px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --radius: 2px;   /* near-square — industrial, not consumer-soft */
+
+  /* ---- MOTION ---------------------------------------------- */
+  --ease:      cubic-bezier(.22, .61, .36, 1);
+  --dur-fast:  0.2s;
+  --dur-base:  0.25s;
+  --dur-slow:  0.7s;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--warm-white);
+  color: var(--navy);
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+a   { color: inherit; }
+ul  { margin: 0; padding: 0; list-style: none; }
+p   { margin: 0; }
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.06;
+}
+
+/* ============================================================
+   ACCESSIBILITY UTILITIES
+   ============================================================ */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
