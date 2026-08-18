@@ -446,10 +446,15 @@ ul{margin:0;padding:0;list-style:none}
     position:absolute;top:78px;left:0;right:0;
     flex-direction:column;gap:0;margin:0;
     background:var(--surface);border-bottom:1px solid var(--border);
-    padding:var(--s5);max-height:0;overflow:hidden;
-    transition:max-height .3s var(--ease);align-items:flex-start;
+    padding-inline:var(--s5);padding-block:0;
+    max-height:0;overflow:hidden;
+    transition:max-height .3s var(--ease),padding-block .3s var(--ease);
+    align-items:flex-start;
   }
-  .nav-open{max-height:500px !important}
+  /* padding-block is fixed, not compressible by max-height alone (even with
+     border-box) — without zeroing it here too, the closed dropdown still
+     renders ~2x var(--s5) of padding and the first link peeks out. */
+  .nav-open{max-height:500px !important;padding-block:var(--s5) !important}
   .nav a{padding-block:var(--s3);width:100%;border-bottom:1px solid var(--border);min-height:0}
   .nav-cta{margin-left:0;width:100%}
   .burger{display:block}
