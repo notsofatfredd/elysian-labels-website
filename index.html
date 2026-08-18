@@ -33,7 +33,10 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet">
+<!-- Non-render-blocking: a slow/unreachable Google Fonts request must never
+     hold up first paint. Loads as print (deprioritized), then swaps to all. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet"></noscript>
 
 <script type="application/ld+json">
 {
@@ -1211,17 +1214,29 @@ ul{margin:0;padding:0;list-style:none}
 (function(){
   var el = document.getElementById('introReveal');
   if (!el) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  var finished = false;
+  function finish(){
+    if (finished) return;
+    finished = true;
     el.classList.add('done');
+  }
+  var reduceMotion = false;
+  try{ reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  if (reduceMotion){
+    finish();
     return;
   }
-  var hold = setTimeout(function(){
+  setTimeout(function(){
     el.classList.add('leaving');
     el.addEventListener('animationend', function handler(e){
       if (e.target !== el) return;
-      el.classList.add('done');
       el.removeEventListener('animationend', handler);
+      finish();
     });
+    /* Safety net: if animationend never fires for any reason (throttled
+       background tab, a blocked/overridden animation, an odd browser),
+       the curtain must never be able to block the site permanently. */
+    setTimeout(finish, 2500);
   }, 1300);
 })();
 
