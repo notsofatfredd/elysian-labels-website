@@ -2,6 +2,8 @@
 
 Static site, no build step. Edit `index.html` directly, upload via cPanel File Manager to `public_html/`.
 
+**cPanel project/folder name is `elysianlabels`** (2026-08-18, Saeed: "make sure elysian project is called elysianlabels for cpanel upload thats the company full name") — the deploy zip's internal top-level folder and the zip filename itself (`elysianlabels-cpanel-YYYY-MM-DD.zip`) both use this from here on, not the shorter `elysian` used in this repo's own folder name (git repo/local working-copy naming is unaffected, this only applies to what actually lands on the server).
+
 ## 2026-08-17 — ATLAS Web OS pass
 - Added system-aware dark/light mode: `prefers-color-scheme` default + manual toggle (header button), choice persisted in `localStorage`, synchronous `<head>` script avoids flash-of-wrong-theme. Pinned-dark brand sections (hero panel, header/footer navy, trust bar, quote-form panel) intentionally stay dark in both modes — only page chrome (cards, borders, body text) adapts. All new text/background pairs checked against WCAG 4.5:1/3:1, not eyeballed — see contrast notes below.
 - Added bottom-anchored mobile CTA bar (Request Quote), thumb-zone pattern for single-conversion-event sites.
