@@ -4,20 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<script>
-/* Synchronous, render-blocking by design — sets data-theme before first paint
-   so there is no flash of the wrong theme. Manual choice wins over system
-   preference; absence of a stored choice means "follow system", so no
-   attribute is set and the CSS prefers-color-scheme media query decides. */
-(function(){
-  try{
-    var stored = localStorage.getItem('elysian-theme');
-    if(stored === 'dark' || stored === 'light'){
-      document.documentElement.setAttribute('data-theme', stored);
-    }
-  }catch(e){}
-})();
-</script>
+<script src="assets/theme-init.js"></script>
 <title>Elysian Labels — Premium Barcode Label Rolls | South Africa</title>
 <meta name="description" content="Direct thermal and thermal transfer label rolls engineered for flawless scannability. Supplying logistics, manufacturing, cold chain and retail across South Africa.">
 <meta name="theme-color" content="#081B3C" media="(prefers-color-scheme: light)">
@@ -35,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Non-render-blocking: a slow/unreachable Google Fonts request must never
      hold up first paint. Loads as print (deprioritized), then swaps to all. -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<link data-font-swap href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet" media="print">
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400;1,8..60,600&display=swap" rel="stylesheet"></noscript>
 
 <script type="application/ld+json">
@@ -1209,125 +1196,7 @@ ul{margin:0;padding:0;list-style:none}
   <a class="btn btn-gold" href="#quote">Request quote <span class="arw" aria-hidden="true">→</span></a>
 </div>
 
-<script>
-/* Intro reveal — plays once per page load, then removes itself. */
-(function(){
-  var el = document.getElementById('introReveal');
-  if (!el) return;
-  var finished = false;
-  function finish(){
-    if (finished) return;
-    finished = true;
-    el.classList.add('done');
-  }
-  var reduceMotion = false;
-  try{ reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
-  if (reduceMotion){
-    finish();
-    return;
-  }
-  setTimeout(function(){
-    el.classList.add('leaving');
-    el.addEventListener('animationend', function handler(e){
-      if (e.target !== el) return;
-      el.removeEventListener('animationend', handler);
-      finish();
-    });
-    /* Safety net: if animationend never fires for any reason (throttled
-       background tab, a blocked/overridden animation, an odd browser),
-       the curtain must never be able to block the site permanently. */
-    setTimeout(finish, 2500);
-  }, 1300);
-})();
-
-/* Hero panel tilt — reacts to cursor like a label catching light.
-   Skipped entirely on touch devices and reduced-motion. */
-(function(){
-  var panel = document.getElementById('heroVisual');
-  if (!panel) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(hover: none)').matches) return;
-
-  panel.addEventListener('mousemove', function(e){
-    var r = panel.getBoundingClientRect();
-    var x = (e.clientX - r.left) / r.width - 0.5;
-    var y = (e.clientY - r.top) / r.height - 0.5;
-    panel.style.transform =
-      'rotateY(' + (x * 8) + 'deg) rotateX(' + (y * -8) + 'deg) scale(1.015)';
-  });
-  panel.addEventListener('mouseleave', function(){
-    panel.style.transform = 'rotateY(0) rotateX(0) scale(1)';
-  });
-})();
-
-/* Mobile burger menu toggle */
-(function(){
-  var burger = document.querySelector('.burger');
-  var nav = document.querySelector('.nav');
-
-  if (!burger || !nav) return;
-
-  burger.addEventListener('click', function(){
-    var isOpen = this.getAttribute('aria-expanded') === 'true';
-    this.setAttribute('aria-expanded', !isOpen);
-    nav.classList.toggle('nav-open');
-  });
-})();
-
-/* Theme toggle — manual choice overrides system preference and persists.
-   The <head> script already applied any stored choice before first paint;
-   this just wires up the click and keeps aria-pressed/label in sync. */
-(function(){
-  var btn = document.getElementById('themeToggle');
-  if (!btn) return;
-  var root = document.documentElement;
-  var mql = window.matchMedia('(prefers-color-scheme: dark)');
-
-  function isDark(){
-    var explicit = root.getAttribute('data-theme');
-    if (explicit === 'dark') return true;
-    if (explicit === 'light') return false;
-    return mql.matches;
-  }
-  function sync(){
-    var dark = isDark();
-    btn.setAttribute('aria-pressed', String(dark));
-    btn.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
-  }
-  sync();
-
-  btn.addEventListener('click', function(){
-    var next = isDark() ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try{ localStorage.setItem('elysian-theme', next); }catch(e){}
-    sync();
-  });
-})();
-
-/* Scroll reveal + year stamp. Motion respects prefers-reduced-motion. */
-(function(){
-  document.getElementById('yr').textContent = new Date().getFullYear();
-
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var items = document.querySelectorAll('.rv');
-
-  if (reduce || !('IntersectionObserver' in window)) {
-    items.forEach(function(el){ el.classList.add('in'); });
-    return;
-  }
-
-  var io = new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
-
-  items.forEach(function(el, i){
-    el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + 'ms';
-    io.observe(el);
-  });
-})();
-</script>
+<script src="assets/site.js"></script>
 
 </body>
 </html>
